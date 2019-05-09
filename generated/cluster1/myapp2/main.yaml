@@ -1,0 +1,42 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-deployment-myapp2
+  namespace: myapp2
+spec:
+  replicas: 4
+  selector:
+    matchLabels:
+      app: myapp2
+  template:
+    metadata:
+      labels:
+        app: myapp2
+    spec:
+      containers:
+      - image: nginx:1.8
+        name: myapp2
+        ports:
+        - containerPort: 8080
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: myapp2
+  namespace: myapp2
+spec:
+  ports:
+  - name: http
+    port: 8080
+    targetPort: 8080
+  selector:
+    app: myapp2
+
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: myapp2
+

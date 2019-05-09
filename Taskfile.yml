@@ -1,0 +1,118 @@
+{
+   "output": "prefixed",
+   "tasks": {
+      "cluster1": {
+         "cmds": [
+            {
+               "task": "cluster1_taskfile"
+            },
+            "task -d tmp/cluster1 generate"
+         ],
+         "desc": "generate components for cluster1"
+      },
+      "cluster1_deploy": {
+         "cmds": [
+            "task -d tmp/cluster1 deploy"
+         ],
+         "desc": "deploy all components for cluster: cluster1"
+      },
+      "cluster1_dryrun": {
+         "cmds": [
+            "task -d tmp/cluster1 dryrun"
+         ],
+         "desc": "dryrun all components for cluster: cluster1"
+      },
+      "cluster1_taskfile": {
+         "cmds": [
+            "mkdir -p tmp/cluster1",
+            "kr8 jsonnet render --cluster cluster1 --format yaml templates/task-generate-cluster-parallel.jsonnet > tmp/cluster1/Taskfile.yml"
+         ],
+         "desc": "generate task file in tmp directory for cluster: cluster1"
+      },
+      "cluster2": {
+         "cmds": [
+            {
+               "task": "cluster2_taskfile"
+            },
+            "task -d tmp/cluster2 generate"
+         ],
+         "desc": "generate components for cluster2"
+      },
+      "cluster2_deploy": {
+         "cmds": [
+            "task -d tmp/cluster2 deploy"
+         ],
+         "desc": "deploy all components for cluster: cluster2"
+      },
+      "cluster2_dryrun": {
+         "cmds": [
+            "task -d tmp/cluster2 dryrun"
+         ],
+         "desc": "dryrun all components for cluster: cluster2"
+      },
+      "cluster2_taskfile": {
+         "cmds": [
+            "mkdir -p tmp/cluster2",
+            "kr8 jsonnet render --cluster cluster2 --format yaml templates/task-generate-cluster-parallel.jsonnet > tmp/cluster2/Taskfile.yml"
+         ],
+         "desc": "generate task file in tmp directory for cluster: cluster2"
+      },
+      "cluster3": {
+         "cmds": [
+            {
+               "task": "cluster3_taskfile"
+            },
+            "task -d tmp/cluster3 generate"
+         ],
+         "desc": "generate components for cluster3"
+      },
+      "cluster3_deploy": {
+         "cmds": [
+            "task -d tmp/cluster3 deploy"
+         ],
+         "desc": "deploy all components for cluster: cluster3"
+      },
+      "cluster3_dryrun": {
+         "cmds": [
+            "task -d tmp/cluster3 dryrun"
+         ],
+         "desc": "dryrun all components for cluster: cluster3"
+      },
+      "cluster3_taskfile": {
+         "cmds": [
+            "mkdir -p tmp/cluster3",
+            "kr8 jsonnet render --cluster cluster3 --format yaml templates/task-generate-cluster-parallel.jsonnet > tmp/cluster3/Taskfile.yml"
+         ],
+         "desc": "generate task file in tmp directory for cluster: cluster3"
+      },
+      "default": {
+         "cmds": [
+            "kr8-helpers check-environment",
+            {
+               "task": "cluster3"
+            },
+            {
+               "task": "cluster1"
+            },
+            {
+               "task": "cluster2"
+            }
+         ]
+      },
+      "taskfiles": {
+         "cmds": [
+            {
+               "task": "cluster3_taskfile"
+            },
+            {
+               "task": "cluster1_taskfile"
+            },
+            {
+               "task": "cluster2_taskfile"
+            }
+         ],
+         "desc": "generate task files for all clusters"
+      }
+   },
+   "version": "2"
+}

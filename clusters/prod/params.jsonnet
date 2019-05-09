@@ -1,0 +1,5 @@
+{
+  _cluster: {
+    tier: 'prod',
+  },
+}

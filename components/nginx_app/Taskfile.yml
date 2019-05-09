@@ -1,0 +1,11 @@
+version: 2
+
+tasks:
+  fetch:
+    desc: "fetch component dependencies"
+
+  generate:
+    desc: "generate"
+    cmds:
+      - kr8-helpers clean-output
+      - kr8-helpers jsonnet-render main.jsonnet

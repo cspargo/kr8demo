@@ -1,0 +1,36 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-deployment-myapp-common-in-cluster1
+  namespace: default
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: myapp-common-in-cluster1
+  template:
+    metadata:
+      labels:
+        app: myapp-common-in-cluster1
+    spec:
+      containers:
+      - image: nginx:1.8
+        name: myapp-common-in-cluster1
+        ports:
+        - containerPort: 8080
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: myapp-common-in-cluster1
+  namespace: default
+spec:
+  ports:
+  - name: http
+    port: 8080
+    targetPort: 8080
+  selector:
+    app: myapp-common-in-cluster1
+
