@@ -10,7 +10,7 @@ kind create cluster --name cluster3 --image kindest/node:v1.13.4
 modify the kubconfig files with your username. And set KUBECONFIG
 
 ```
-for cluster in cluster1 cluster2 cluster3; do sed -i bak -e 's/kubernetes-admin'$USER'/cspargo@'$cluster/ -e 's/kubernetes-admin@/'$USER'cspargo@/' /Users/cspargo/.kube/kind-config-$cluster; done
+for cluster in cluster1 cluster2 cluster3; do sed -i bak -e 's/kubernetes-admin/'$USER'@'$cluster/ -e 's/kubernetes-admin@/'$USER'@/' ~/.kube/kind-config-$cluster; done
 export KUBECONFIG="$(kind get kubeconfig-path --name="cluster1"):$(kind get kubeconfig-path --name="cluster2"):$(kind get kubeconfig-path --name="cluster3")"
 ```
 
